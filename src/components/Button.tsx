@@ -16,91 +16,49 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
+  fullWidthOnMobile?: boolean;
 }
 
-export default function Button({
-  variant = 'primary',
-  size = 'md',
-  fullWidth = false,
-  className,
-  children,
-  ...props
-}: ButtonProps) {
-  return (
-    <motion.div
-      whileHover={{ scale: 1.02, y: -2 }}
-      whileTap={{ scale: 0.98, y: 0 }}
-      className={cn(fullWidth && 'full-width')}
-      style={{ display: fullWidth ? 'block' : 'inline-block' }}
-    >
-      <button
-        className={cn('btn', `btn-${variant}`, `btn-${size}`, fullWidth && 'full-width', className)}
-        {...props}
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = 'primary', size = 'md', fullWidth = false, fullWidthOnMobile = false, ...props }, ref) => {
+    const variants = {
+      primary: 'bg-[#2C2C2C] text-white hover:bg-black',
+      secondary: 'bg-[#C05621] text-white hover:bg-[#A0451B]',
+      outline: 'border border-[#2C2C2C] text-[#2C2C2C] hover:bg-[#2C2C2C] hover:text-white',
+      ghost: 'text-[#2C2C2C] hover:bg-gray-100',
+    };
+
+    const sizes = {
+      sm: 'px-4 py-2 text-xs',
+      md: 'px-6 py-3 text-sm',
+      lg: 'px-8 py-4 text-base',
+    };
+
+    return (
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className={cn(
+          "inline-block",
+          fullWidth && "w-full",
+          fullWidthOnMobile && "w-full md:w-auto"
+        )}
       >
-        {children}
-      </button>
-      <style jsx>{`
-        .btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 600;
-          font-family: var(--font-body);
-          transition: all 0.2s ease;
-          border-radius: var(--radius-pill);
-          white-space: nowrap;
-          border: none;
-          cursor: pointer;
-          width: 100%;
-          height: 100%;
-        }
+        <button
+          ref={ref}
+          className={cn(
+            'inline-flex items-center justify-center font-medium transition-all duration-200 rounded-sm disabled:opacity-50 disabled:cursor-not-allowed w-full',
+            variants[variant],
+            sizes[size],
+            className
+          )}
+          {...props}
+        />
+      </motion.div>
+    );
+  }
+);
 
-        /* Sizes */
-        .btn-sm {
-          padding: 8px 16px;
-          font-size: 13px;
-        }
-        .btn-md {
-          padding: 12px 28px;
-          font-size: 15px;
-        }
-        .btn-lg {
-          padding: 16px 36px;
-          font-size: 16px;
-        }
+Button.displayName = 'Button';
 
-        /* Variants */
-        .btn-primary {
-          background-color: var(--accent);
-          color: white;
-          box-shadow: var(--shadow-accent);
-        }
-        .btn-primary:hover {
-          opacity: 0.9;
-        }
-
-        .btn-secondary {
-          background-color: var(--text-primary);
-          color: white;
-          box-shadow: var(--shadow-medium);
-        }
-
-        .btn-outline {
-          background-color: var(--bg-surface);
-          border: 1px solid var(--border-color) !important;
-          color: var(--text-secondary);
-          box-shadow: var(--shadow-subtle);
-        }
-
-        .btn-ghost {
-          background: transparent;
-          color: var(--text-secondary);
-        }
-
-        .full-width {
-          width: 100%;
-        }
-      `}</style>
-    </motion.div>
-  );
-}
+export default Button;
