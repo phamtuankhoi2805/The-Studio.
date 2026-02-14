@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dự án Marketplace & Portfolio (The Studio)
 
-## Getting Started
+Đây là một dự án website kết hợp giữa **Freelance Portfolio** và **Cửa hàng Sản phẩm Số (Source Code Marketplace)**, được tối ưu hóa cho phong cách "Kiến trúc sư" sang trọng và hiện đại.
 
-First, run the development server:
+## Bắt đầu nhanh
+
+Đầu tiên, hãy khởi chạy máy chủ phát triển:
 
 ```bash
 npm run dev
-# or
+# hoặc
 yarn dev
-# or
+# hoặc
 pnpm dev
-# or
+# hoặc
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Mở [http://localhost:3000](http://localhost:3000) trên trình duyệt để xem kết quả.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Dữ liệu của các sản phẩm và dự án có thể được chỉnh sửa trực tiếp tại `src/lib/data.ts`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Triển khai (Deploy) lên Vercel
 
-## Learn More
+Cách dễ nhất để triển khai ứng dụng Next.js của bạn là sử dụng **Nền tảng Vercel**.
 
-To learn more about Next.js, take a look at the following resources:
+### Các bước thực hiện:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **Đưa code lên GitHub**: Tạo một Repo mới và push toàn bộ mã nguồn này lên đó.
+2.  **Kết nối với Vercel**: Truy cập [Vercel.com](https://vercel.com), chọn "Add New Project" và chọn Repo GitHub của bạn.
+3.  **Cấu hình Biến môi trường (Environment Variables)**: 
+    - Truy cập phần cài đặt dự án trên Vercel.
+    - Copy các giá trị từ file `.env.local` của bạn vào phần cấu hình biến trên Vercel.
+4.  **Deploy**: Bấm nút "Deploy".
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Hướng dẫn chi tiết & Phát triển lâu dài
+Xem thêm tại tệp: **[deployment_guide.md](file:///C:/Users/khoik7vn/.gemini/antigravity/brain/934fa813-ed1c-4d7f-b83e-97be43352115/deployment_guide.md)** (Trong thư mục brain của hệ thống).
 
-## Deploy on Vercel
+## Công nghệ sử dụng
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS & Vanilla CSS
+- **Animations**: Framer Motion
+- **Database/Auth**: Supabase (Hỗ trợ cấu hình Mock Data sẵn)
+- **Fonts**: Playfair Display (Serif) & Inter (Sans)
